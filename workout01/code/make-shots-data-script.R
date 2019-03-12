@@ -1,8 +1,8 @@
 
-title: "Make shots data script"
-author: "Ewen Dai"
-date: "March 11, 2019"
-output: github_document
+title: "Make shots-data script"
+description: Script to make shots-data.csv
+input(s): Data Sets of players
+output(s): shots-data.csv
 
 # Read in the data sets
 iguodala = read.csv(file = "data/andre-iguodala.csv", stringsAsFactors = F)
@@ -58,3 +58,14 @@ sink(file = "output/stephen-curry-summary.txt")
 summary(curry)
 sink()
 
+# Stack the tables & Export
+write.csv(
+  x = rbind(iguodala, green, durant, thompson, curry),
+  file = 'data/shots-data.csv'
+)
+
+# Sink
+shots = read.csv(file = "data/shots-data.csv", stringsAsFactors = F)
+sink(file = "output/shots-data-summary.txt")
+summary(shots)
+sink()
