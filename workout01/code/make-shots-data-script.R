@@ -38,3 +38,23 @@ thompson['minute'] = thompson['period']*4 - thompson['minutes_remaining']
 curry['minute'] = curry['period']*4 - curry['minutes_remaining']
 
 # Sinking
+sink(file = "output/andre-iguodala-summary.txt")
+summary(iguodala)
+sink()
+
+sink(file = "output/draymond-green-summary.txt")
+summary(green)
+sink()
+
+sink(file = "output/kevin-durant-summary.txt")
+summary(durant)
+sink()
+
+sink(file = "output/klay-thompson-summary.txt")
+summary(thompson)
+sink()
+
+sink(file = "output/stephen-curry-summary.txt")
+summary(curry)
+sink()
+
