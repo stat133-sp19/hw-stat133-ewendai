@@ -1,11 +1,11 @@
 
-title: ""
-description: bleh
-input(s): dskj
-output(s): klsd
+title: "Make shot charts script"
+description: Script to make shot charts
+input(s): nba-court.jpg, data for each player, shots-data.csv
+output(s): Make shot charts for each player along with a facetted shot chart
 
 library(jpeg)
-library(g)
+library(grid)
 library(ggplot2)
 
 # court image (to be used as background of plot)
@@ -98,4 +98,17 @@ ggplot(data = curry) +
   ylim(-50, 420) +
   ggtitle('Shot Chart: Stephen Curry (2016 season)') +
   theme_minimal()
+dev.off()
+
+# Facetted Shot Chart
+pdf(file = "images/gsw-shot-charts.pdf", width = 8, height = 7)
+ggplot(data = shots, aes(x = x, y = y)) + 
+  geom_point(aes(color = shot_made_flag)) + 
+  facet_wrap(~ name)
+dev.off()
+
+png(filename = "images/gsw-shot-charts.png", width = 8, height = 7, units = "in", res = 200)
+ggplot(data = shots, aes(x = x, y = y)) + 
+  geom_point(aes(color = shot_made_flag)) + 
+  facet_wrap(~ name)
 dev.off()
