@@ -102,4 +102,16 @@ Let's take a look at the positions from which each player shoots:
 
 <img src="../images/gsw-shot-charts.png" width="80%" style="display: block; margin: auto;" />
 
-Looking at the [GSW Roster](https://www.nba.com/warriors/roster/), all 5 players are either Guards or Forwards or both.
+Looking at the [GSW Roster](https://www.nba.com/warriors/roster/), all 5 players are either Guards or Forwards or both. Durant and Iguodala are both Forwards and as seen in the above graphic, attempt more 2 pointers than 3 pointers overall. Curry, on the other hand, attempts more 3 pointers overall than 2 pointers.
+
+Maybe the average points gained per shot has some correlation with the player's position? Maybe 2 pointers are easier to shoot than 3 pointers, and that's why they have an higher average point gain? How would we weight these factors? We don't know; we don't have enough data to determine that.
+
+#### Conclusion
+
+From our current data and analysis, we can tentatively conclude that Kevin Durant appears to be the best (and most valuable) player on the GSW under the definition of "best" as the player who earns the most points per shot.
+
+However, the reader must keep in mind that our data and analysis are not comphrehensive. For example, Curry and Thompson have high 3PT Shooting successes, and 3 pointers, by definition, earn more points (and may be more difficult). So should we weight successful 3 pointers as better than 2 pointers? We would need to analyze more data to come to a better conclusion.
+
+#### References
+
+Data used for this article has been pulled from <https://github.com/ucb-stat133/stat133-hws/tree/master/data> and <https://www.nba.com/warriors/roster/>.
