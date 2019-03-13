@@ -3,9 +3,15 @@ Workout 01
 Ewen Dai
 March 9, 2019
 
-### Who is the best player of the Golden State Warriors?
+### Best of the Golden State Warriors
 
-Who is the best player of the Golden State Warriors? This depends on how you define the concept of "best". Does "best" mean "most points scored per shot"? or does it mean "most effective at shooting"? In this report, we will analyze the effective shooting percentages of 5 well-known players in the GSW and determine who is the "best" player of the GSW.
+Who is the best player of the Golden State Warriors? That depends on how you define the concept of "best". Does "best" mean "most points scored per shot"? or does it mean "most effective at shooting"? In this report, we will analyze the effective shooting percentages of 5 well-known players in the GSW and determine who is the "best" player.
+
+#### The Data and the Stats
+
+The players whose data we will be analyzing today are Andre Iguodala, Graymond Green, Kevin Durant, Klay Thompson, and Stephen Curry. The data has been provided by Professor Gaston Sanchez, and can be found [here](https://github.com/ucb-stat133/stat133-hws/tree/master/data).
+
+For each player, we have calculated the 2PT Effective Shooting %, the 3PT Effective Shooting %, and the overall Effective Shooting %.
 
 ##### 2PT Effective Shooting % by Player
 
@@ -34,6 +40,66 @@ Who is the best player of the Golden State Warriors? This depends on how you def
     ## 4  Stephen Curry  2500 1168 0.4672000
     ## 5 Graymond Green  1156  490 0.4238754
 
+#### Analysis and Discussion
+
+From the above charts, we can clearly see that the overall, the player most effective at shooting is Durant, while the players best at 2 pointers and 3 pointers are Iguodala and Thompson, respectively.
+
+Logically, the player best at shooting would get the most points, and would therefore be the most valuable. However, looking at the above data, it's not clear who the most effective player is: there's a different player for each method we have of looking at Effective Shooting %.
+
+So how can we determine who the best player is? Let's look at the average number of points scored per shot for each player.
+
+##### Average Points per Shot by Player
+
+``` r
+iguodala_avg = (tbl_2pt[tbl_2pt['name'] == 'Andre Iguodala', ]['made']*2 + tbl_3pt[tbl_3pt['name'] == 'Andre Iguodala', ]['made']*3)/tbl_pt[tbl_pt['name'] == 'Andre Iguodala', ]['total']
+
+green_avg = (tbl_2pt[tbl_2pt['name'] == 'Graymond Green', ]['made']*2 + tbl_3pt[tbl_3pt['name'] == 'Graymond Green', ]['made']*3)/tbl_pt[tbl_pt['name'] == 'Graymond Green', ]['total']
+
+durant_avg = (tbl_2pt[tbl_2pt['name'] == 'Kevin Durant', ]['made']*2 + tbl_3pt[tbl_3pt['name'] == 'Kevin Durant', ]['made']*3)/tbl_pt[tbl_pt['name'] == 'Kevin Durant', ]['total']
+
+thompson_avg = (tbl_2pt[tbl_2pt['name'] == 'Klay Thompson', ]['made']*2 + tbl_3pt[tbl_3pt['name'] == 'Klay Thompson', ]['made']*3)/tbl_pt[tbl_pt['name'] == 'Klay Thompson', ]['total']
+
+curry_avg = (tbl_2pt[tbl_2pt['name'] == 'Stephen Curry', ]['made']*2 + tbl_3pt[tbl_3pt['name'] == 'Stephen Curry', ]['made']*3)/tbl_pt[tbl_pt['name'] == 'Stephen Curry', ]['total']
+```
+
+``` r
+iguodala_avg[[1]]
+```
+
+    ## [1] 1.191375
+
+``` r
+green_avg[[1]]
+```
+
+    ## [1] 0.9757785
+
+``` r
+durant_avg[[1]]
+```
+
+    ## [1] 1.196721
+
+``` r
+thompson_avg[[1]]
+```
+
+    ## [1] 1.144262
+
+``` r
+curry_avg[[1]]
+```
+
+    ## [1] 1.1584
+
+Clearly, the player with the highest average points earned per shot is Durant, with Iguodala following extremely close behind.
+
+Now, at this point, it would be easy and is tempting to conclude that Durant is the star player of the GSW. However, that may be too hasty a conclusion.
+
+Let's take a look at the positions from which each player shoots:
+
 ##### Shot Charts by Player
 
 <img src="../images/gsw-shot-charts.png" width="80%" style="display: block; margin: auto;" />
+
+Looking at the [GSW Roster](https://www.nba.com/warriors/roster/), all 5 players are either Guards or Forwards or both.

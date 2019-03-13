@@ -103,12 +103,16 @@ dev.off()
 # Facetted Shot Chart
 pdf(file = "images/gsw-shot-charts.pdf", width = 8, height = 7)
 ggplot(data = shots, aes(x = x, y = y)) + 
-  geom_point(aes(color = shot_made_flag)) + 
+  annotation_custom(court_image, -250, 250, -50, 420) +
+  geom_point(aes(color = shot_made_flag)) + theme_minimal() + 
+  ylim(-50, 420) +
   facet_wrap(~ name)
 dev.off()
 
 png(filename = "images/gsw-shot-charts.png", width = 8, height = 7, units = "in", res = 200)
 ggplot(data = shots, aes(x = x, y = y)) + 
-  geom_point(aes(color = shot_made_flag)) + 
+  annotation_custom(court_image, -250, 250, -50, 420) +
+  geom_point(aes(color = shot_made_flag)) + theme_minimal() + 
+  ylim(-50, 420) +
   facet_wrap(~ name)
 dev.off()
