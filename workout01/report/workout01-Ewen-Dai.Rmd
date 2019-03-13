@@ -1,23 +1,87 @@
 ---
-title: "workout01-Ewen-Dai"
+title: "Workout 01"
 author: "Ewen Dai"
 date: "March 9, 2019"
 output: github_document
 ---
 
-### 1) File Structure
+```{r, echo=FALSE, results='hide', include=FALSE}
+library(dplyr)
+library(ggplot2)
 
-```{r, eval=FALSE}
-mkdir workout01
-cd workout01
-mkdir data
-mkdir code
-mkdir output
-mkdir images
-mkdir report
+shots = read.csv(file = "../data/shots-data.csv", stringsAsFactors = F)
 ```
 
-### 2) Data
 
-See data-dictionary.md
+### Who is the best player of the Golden State Warriors? 
+
+Who is the best player of the Golden State Warriors? This depends on how you define the concept of "best". Does "best" mean "most points scored per shot"? or does it mean "most effective at shooting"? In this report, we will analyze the effective shooting percentages of 5 well-known players in the GSW and determine who is the "best" player of the GSW. 
+
+##### 2PT Effective Shooting % by Player
+```{r, echo=FALSE}
+tbl_2pt_data = shots[shots['shot_type'] == '2PT Field Goal', ]
+tbl_2pt_data = tbl_2pt_data[ , c("name", "shot_made_flag")]
+name = unique(tbl_2pt_data[ , 'name'])
+tbl_2pt = data.frame(name)
+tbl_2pt[1,'total'] = length(tbl_2pt_data[tbl_2pt_data['name'] == 'Andre Iguodala'])
+tbl_2pt[2,'total'] = length(tbl_2pt_data[tbl_2pt_data['name'] == 'Graymond Green'])
+tbl_2pt[3,'total'] = length(tbl_2pt_data[tbl_2pt_data['name'] == 'Kevin Durant'])
+tbl_2pt[4,'total'] = length(tbl_2pt_data[tbl_2pt_data['name'] == 'Klay Thompson'])
+tbl_2pt[5,'total'] = length(tbl_2pt_data[tbl_2pt_data['name'] == 'Stephen Curry'])
+tbl_2pt[1,'made'] = length(tbl_2pt_data[tbl_2pt_data['name'] == 'Andre Iguodala' & tbl_2pt_data['shot_made_flag'] == 'shot_yes'])
+tbl_2pt[2,'made'] = length(tbl_2pt_data[tbl_2pt_data['name'] == 'Graymond Green' & tbl_2pt_data['shot_made_flag'] == 'shot_yes'])
+tbl_2pt[3,'made'] = length(tbl_2pt_data[tbl_2pt_data['name'] == 'Kevin Durant' & tbl_2pt_data['shot_made_flag'] == 'shot_yes'])
+tbl_2pt[4,'made'] = length(tbl_2pt_data[tbl_2pt_data['name'] == 'Klay Thompson' & tbl_2pt_data['shot_made_flag'] == 'shot_yes'])
+tbl_2pt[5,'made'] = length(tbl_2pt_data[tbl_2pt_data['name'] == 'Stephen Curry' & tbl_2pt_data['shot_made_flag'] == 'shot_yes'])
+tbl_2pt['perc_made'] = tbl_2pt['made']/tbl_2pt['total']
+tbl_2pt = arrange(tbl_2pt, desc(perc_made))
+tbl_2pt
+```
+
+##### 3PT Effective Shooting % by Player
+```{r, echo=FALSE}
+tbl_3pt_data = shots[shots['shot_type'] == '3PT Field Goal', ]
+tbl_3pt_data = tbl_3pt_data[ , c("name", "shot_made_flag")]
+name = unique(tbl_3pt_data[ , 'name'])
+tbl_3pt = data.frame(name)
+tbl_3pt[1,'total'] = length(tbl_3pt_data[tbl_3pt_data['name'] == 'Andre Iguodala'])
+tbl_3pt[2,'total'] = length(tbl_3pt_data[tbl_3pt_data['name'] == 'Graymond Green'])
+tbl_3pt[3,'total'] = length(tbl_3pt_data[tbl_3pt_data['name'] == 'Kevin Durant'])
+tbl_3pt[4,'total'] = length(tbl_3pt_data[tbl_3pt_data['name'] == 'Klay Thompson'])
+tbl_3pt[5,'total'] = length(tbl_3pt_data[tbl_3pt_data['name'] == 'Stephen Curry'])
+tbl_3pt[1,'made'] = length(tbl_3pt_data[tbl_3pt_data['name'] == 'Andre Iguodala' & tbl_3pt_data['shot_made_flag'] == 'shot_yes'])
+tbl_3pt[2,'made'] = length(tbl_3pt_data[tbl_3pt_data['name'] == 'Graymond Green' & tbl_3pt_data['shot_made_flag'] == 'shot_yes'])
+tbl_3pt[3,'made'] = length(tbl_3pt_data[tbl_3pt_data['name'] == 'Kevin Durant' & tbl_3pt_data['shot_made_flag'] == 'shot_yes'])
+tbl_3pt[4,'made'] = length(tbl_3pt_data[tbl_3pt_data['name'] == 'Klay Thompson' & tbl_3pt_data['shot_made_flag'] == 'shot_yes'])
+tbl_3pt[5,'made'] = length(tbl_3pt_data[tbl_3pt_data['name'] == 'Stephen Curry' & tbl_3pt_data['shot_made_flag'] == 'shot_yes'])
+tbl_3pt['perc_made'] = tbl_3pt['made']/tbl_3pt['total']
+tbl_3pt = arrange(tbl_3pt, desc(perc_made))
+tbl_3pt
+```
+
+##### Effective Shooting % by Player
+```{r, echo=FALSE}
+tbl_pt_data = shots
+tbl_pt_data = tbl_pt_data[ , c("name", "shot_made_flag")]
+name = unique(tbl_pt_data[ , 'name'])
+tbl_pt = data.frame(name)
+tbl_pt[1,'total'] = length(tbl_pt_data[tbl_pt_data['name'] == 'Andre Iguodala'])
+tbl_pt[2,'total'] = length(tbl_pt_data[tbl_pt_data['name'] == 'Graymond Green'])
+tbl_pt[3,'total'] = length(tbl_pt_data[tbl_pt_data['name'] == 'Kevin Durant'])
+tbl_pt[4,'total'] = length(tbl_pt_data[tbl_pt_data['name'] == 'Klay Thompson'])
+tbl_pt[5,'total'] = length(tbl_pt_data[tbl_pt_data['name'] == 'Stephen Curry'])
+tbl_pt[1,'made'] = length(tbl_pt_data[tbl_pt_data['name'] == 'Andre Iguodala' & tbl_pt_data['shot_made_flag'] == 'shot_yes'])
+tbl_pt[2,'made'] = length(tbl_pt_data[tbl_pt_data['name'] == 'Graymond Green' & tbl_pt_data['shot_made_flag'] == 'shot_yes'])
+tbl_pt[3,'made'] = length(tbl_pt_data[tbl_pt_data['name'] == 'Kevin Durant' & tbl_pt_data['shot_made_flag'] == 'shot_yes'])
+tbl_pt[4,'made'] = length(tbl_pt_data[tbl_pt_data['name'] == 'Klay Thompson' & tbl_pt_data['shot_made_flag'] == 'shot_yes'])
+tbl_pt[5,'made'] = length(tbl_pt_data[tbl_pt_data['name'] == 'Stephen Curry' & tbl_pt_data['shot_made_flag'] == 'shot_yes'])
+tbl_pt['perc_made'] = tbl_pt['made']/tbl_pt['total']
+tbl_pt = arrange(tbl_pt, desc(perc_made))
+tbl_pt
+```
+
+##### Shot Charts by Player
+```{r out.width='80%', echo=FALSE, fig.align='center'}
+knitr::include_graphics('../images/gsw-shot-charts.png')
+```
 
