@@ -1,0 +1,16 @@
+Package: binomial
+Type: Package
+Title: Binomial
+Version: 0.1.0
+Author: Ewen Dai
+Maintainer: The package maintainer <yiwendai99@berkeley.edu>
+Description: R package that models the binomial and relates to the number of successes and a fixed number of trials and probability.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Suggests: 
+    testthat,
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
+RoxygenNote: 6.1.1

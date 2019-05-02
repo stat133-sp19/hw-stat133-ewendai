@@ -1,0 +1,60 @@
+---
+title: "Getting started with binomial"
+author: "Ewen Dai"
+date: "May 2, 2019"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to binomial}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## Binomial
+
+This is a R package that models the binomial and relates to the number of successes and a fixed number of trials and probability.
+
+## Creating a Binomial Variable
+
+You can create a binomial variable using the `bin_variable()` function.
+```{r}
+var = bin_variable(4, 0.5)
+var
+```
+
+## Computations with `trials` and `prob`
+
+Given `trials` and `prob`, the number of trials and the value of probability, the following functions can be used:
+*`bin_distribution(trials, prob)`: calculates the probability distribution of binomial(trials, prob)
+*`bin_cumulative(trials, prob)`: calculates the cumulative distribution of binomial(trials, prob)
+*`bin_mean(trials, prob)`: calculates the mean of binomial(trials, prob)
+*`bin_variance(trials, prob)`: calculates the variance of binomial(trials, prob)
+*`bin_mode(trials, prob)`: calculates the mode of binomial(trials, prob)
+*`bin_skewness(trials, prob)`: calculates the skewness of binomial(trials, prob)
+*`bin_kurtosis(trials, prob)`: calculates the kurtosis of binomial(trials, prob)
+
+```{r}
+trials = 10
+prob = 0.5
+bin_distribution(trials, prob)
+bin_cumulative(trials, prob)
+bin_mean(trials, prob)
+bin_variance(trials, prob)
+bin_mode(trials, prob)
+bin_skewness(trials, prob)
+bin_kurtosis(trials, prob)
+```
+
+## Considering Successes
+
+`bin_choose(n, k)` and `bin_probability(success, trials, prob)` have to do with the number of successes.
+
+`bin_choose(n, k)` calculates the total different combinations of `k` successes in `n` trials.
+```{r}
+bin_choose(10, 3)
+```
+
+`bin_probability(success, trials, prob)` calculates the total probability of `success` successes in `trials` trials with `prob` probability.
+```{r}
+bin_probability(3, 10, 0.5)
+```
+
